@@ -7,23 +7,30 @@
 LC_ALL=C
 export LC_ALL
 
+# 根据命令参数设置变量值和同时设置默认值
 . auto/options
+# 初始化编译项目工程时产生目录的变量
 . auto/init
+# 分析Nginx源码结构
 . auto/sources
 
+# 生成的编译文件架 会产生在此目录
 test -d $NGX_OBJS || mkdir $NGX_OBJS
 
+# 生成ngx_auto_config.h 文件
 echo > $NGX_AUTO_HEADERS_H
+# 生成autoconf.err
 echo > $NGX_AUTOCONF_ERR
 
+# 生成ngx_auto_headers.h 同时将命令行参数 入宏定义中
 echo "#define NGX_CONFIGURE \"$NGX_CONFIGURE\"" > $NGX_AUTO_CONFIG_H
 
-
+# 如果开启debug 则在ngx_autoconf.h 中写入相关宏定义
 if [ $NGX_DEBUG = YES ]; then
     have=NGX_DEBUG . auto/have
 fi
 
-
+# 读取当前操作系统的 OS名称 kernel版本 32/64内核
 if test -z "$NGX_PLATFORM"; then
     echo "checking for OS"
 
@@ -46,21 +53,30 @@ else
     NGX_SYSTEM=$NGX_PLATFORM
 fi
 
+exit 0
+
+# 检查并设置编译器 对编译器相关参数 操作进行封装 使其支持多种编译器
 . auto/cc/conf
 
+# unix 环境下 一些必要的头文件 同时对头文件进行检查
 if [ "$NGX_PLATFORM" != win32 ]; then
     . auto/headers
 fi
 
+# 检查操作系统 并根据操作系统的不同设置不同的变量 决定了如果利用各个操作系统的特性
 . auto/os/conf
 
+# 检查类unix操作系统的相关调用是否正常
 if [ "$NGX_PLATFORM" != win32 ]; then
     . auto/unix
 fi
 
+# 生成 ngx_modules.c(其中定义了ngx_modules数组) 文件 其中指定了Nginx执行时候加载执行的模块 ngx_modules数组对顺序很敏感会改变模块加载顺序
 . auto/modules
+# 检查编译执行中 用到的 动态库 是否可用 版本信息是否正确
 . auto/lib/conf
 
+# 处理安装后路径 包含默认路径
 case ".$NGX_PREFIX" in
     .)
         NGX_PREFIX=${NGX_PREFIX:-/usr/local/nginx}
@@ -76,10 +92,12 @@ case ".$NGX_PREFIX" in
     ;;
 esac
 
+# 处理安装后conf文件的路径
 if [ ".$NGX_CONF_PREFIX" != "." ]; then
     have=NGX_CONF_PREFIX value="\"$NGX_CONF_PREFIX/\"" . auto/define
 fi
 
+# 处理安装后sbin pid lock 临时目录 等路径
 have=NGX_SBIN_PATH value="\"$NGX_SBIN_PATH\"" . auto/define
 have=NGX_CONF_PATH value="\"$NGX_CONF_PATH\"" . auto/define
 have=NGX_PID_PATH value="\"$NGX_PID_PATH\"" . auto/define
@@ -98,6 +116,7 @@ have=NGX_HTTP_UWSGI_TEMP_PATH value="\"$NGX_HTTP_UWSGI_TEMP_PATH\""
 have=NGX_HTTP_SCGI_TEMP_PATH value="\"$NGX_HTTP_SCGI_TEMP_PATH\""
 . auto/define
 
+# 设置makefile信息 同时成成makefile 文件
 . auto/make
 . auto/lib/make
 . auto/install

@@ -2,6 +2,7 @@
 # Copyright (C) Igor Sysoev
 # Copyright (C) Nginx, Inc.
 
+# 此脚本中变量与 ./configure --help 中各命令的设置一直 
 
 help=no
 
@@ -148,6 +149,8 @@ NGX_LIBATOMIC=NO
 NGX_CPU_CACHE_LINE=
 
 NGX_POST_CONF_MSG=
+
+# 取出各参数设置的值 并对变量进行赋值
 
 opt=
 
@@ -313,9 +316,10 @@ use the \"--without-http_limit_conn_module\" option instead"
     esac
 done
 
-
+# 执行脚本时候的命令以参数
 NGX_CONFIGURE="$opt"
 
+# ./configure --help
 
 if [ $help = yes ]; then
 
@@ -461,6 +465,7 @@ END
     exit 1
 fi
 
+# 以下根据用户赋值变量对各参数进行处理
 
 if [ $HTTP = NO ]; then
     HTTP_CHARSET=NO
@@ -480,6 +485,7 @@ if [ ".$NGX_PLATFORM" = ".win32" ]; then
 fi
 
 
+# make install 时候用到的 Nginx 各功能文件的目录
 NGX_CONF_PATH=${NGX_CONF_PATH:-conf/nginx.conf}
 NGX_CONF_PREFIX=`dirname $NGX_CONF_PATH`
 NGX_PID_PATH=${NGX_PID_PATH:-logs/nginx.pid}

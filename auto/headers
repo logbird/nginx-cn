@@ -2,7 +2,7 @@
 # Copyright (C) Igor Sysoev
 # Copyright (C) Nginx, Inc.
 
-
+# 对每个头文件进行检查 测试头文件是否存在
 ngx_include="unistd.h";      . auto/include
 ngx_include="inttypes.h";    . auto/include
 ngx_include="limits.h";      . auto/include
