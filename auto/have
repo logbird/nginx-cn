@@ -2,7 +2,7 @@
 # Copyright (C) Igor Sysoev
 # Copyright (C) Nginx, Inc.
 
-# 根据have变量 在ngx_autoconf.h 中加入 以下宏定义 并将值设置为1
+# 根据have变量 在ngx_autoconf.h 中加入 以下宏定义 并将值设置为1 
 cat << END >> $NGX_AUTO_CONFIG_H
 
 #ifndef $have
