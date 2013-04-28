@@ -2,6 +2,12 @@
 # Copyright (C) Igor Sysoev
 # Copyright (C) Nginx, Inc.
 
+# 所有功能由一下四部分组成 
+# _MODULES  表示 当前功能需要的模块
+# _INCS 表示当前功能依赖的源码目录
+# _DEPS 表示当前功能依赖的头文件信息 makefile 也会用到
+# _SRCS 编译时需要的源文件
+
 
 CORE_MODULES="ngx_core_module ngx_errlog_module ngx_conf_module"
 

@@ -2,7 +2,7 @@
 # Copyright (C) Igor Sysoev
 # Copyright (C) Nginx, Inc.
 
-
+# 用于定义一些临时文件的路径
 NGX_MAKEFILE=$NGX_OBJS/Makefile
 NGX_MODULES_C=$NGX_OBJS/ngx_modules.c
 
@@ -22,7 +22,7 @@ NGX_USE_PCH=
 
 
 # check the echo's "-n" option and "\c" capability
-
+# 检查 echo 是否支持 -n 和 \c 详细请 `man echo`
 if echo "test\c" | grep c >/dev/null; then
 
     if echo -n test | grep n >/dev/null; then
@@ -41,6 +41,7 @@ fi
 
 
 # create Makefile
+# 创建一个新的Makefile文件 同时加入 make clean功能 来清理 执行过程中产生的文件
 
 cat << END > Makefile
 

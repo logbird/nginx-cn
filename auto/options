@@ -485,7 +485,7 @@ if [ ".$NGX_PLATFORM" = ".win32" ]; then
 fi
 
 
-# make install 时候用到的 Nginx 各功能文件的目录
+# make install 时候用到的 Nginx 各功能文件的默认路径
 NGX_CONF_PATH=${NGX_CONF_PATH:-conf/nginx.conf}
 NGX_CONF_PREFIX=`dirname $NGX_CONF_PATH`
 NGX_PID_PATH=${NGX_PID_PATH:-logs/nginx.pid}
