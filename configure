@@ -53,8 +53,6 @@ else
     NGX_SYSTEM=$NGX_PLATFORM
 fi
 
-exit 0
-
 # 检查并设置编译器 对编译器相关参数 操作进行封装 使其支持多种编译器
 . auto/cc/conf
 
