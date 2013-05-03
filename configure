@@ -116,7 +116,9 @@ have=NGX_HTTP_SCGI_TEMP_PATH value="\"$NGX_HTTP_SCGI_TEMP_PATH\""
 
 # 设置makefile信息 同时成成makefile 文件
 . auto/make
+# 生成动态库的编译选项到makefile中
 . auto/lib/make
+# install相关的makefile信息
 . auto/install
 
 # STUB
@@ -125,4 +127,5 @@ have=NGX_HTTP_SCGI_TEMP_PATH value="\"$NGX_HTTP_SCGI_TEMP_PATH\""
 have=NGX_USER value="\"$NGX_USER\"" . auto/define
 have=NGX_GROUP value="\"$NGX_GROUP\"" . auto/define
 
+# 信息汇总输出
 . auto/summary

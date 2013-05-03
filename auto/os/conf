@@ -2,9 +2,11 @@
 # Copyright (C) Igor Sysoev
 # Copyright (C) Nginx, Inc.
 
+# 该脚本实现了Nginx跨平台的部分特性
 
 echo "checking for $NGX_SYSTEM specific features"
 
+# 根据之前获取的平台类型 对不同平台进行检测
 case "$NGX_PLATFORM" in
 
     FreeBSD:*)
@@ -68,7 +70,7 @@ case "$NGX_PLATFORM" in
 
 esac
 
-
+#根据 32 64内核进行不同的常量定义
 case "$NGX_MACHINE" in
 
     i386 | i686 | i86pc)

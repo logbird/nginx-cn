@@ -2,6 +2,8 @@
 # Copyright (C) Igor Sysoev
 # Copyright (C) Nginx, Inc.
 
+# 根据不同条件产生一组模块列表 同时生成objs/ngx_modules.c 文件
+# 生成的模块顺序会影响 最后 模块加载顺序
 
 if [ $EVENT_SELECT = NO -a $EVENT_FOUND = NO ]; then
     EVENT_SELECT=YES
@@ -369,7 +371,7 @@ fi
 #    . $NGX_OBJS/auto
 #fi
 
-
+# NGX_ADDONS 为用户执行configure脚本时 指定的模块列表
 if test -n "$NGX_ADDONS"; then
 
     echo configuring additional modules
@@ -378,6 +380,7 @@ if test -n "$NGX_ADDONS"; then
     do
         echo "adding module in $ngx_addon_dir"
 
+        # 如果存在就加载每个模块中的config脚本
         if test -f $ngx_addon_dir/config; then
             . $ngx_addon_dir/config
 

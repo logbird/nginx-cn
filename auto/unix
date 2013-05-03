@@ -3,6 +3,7 @@
 # Copyright (C) Nginx, Inc.
 
 
+# 对unix通用配置和系统调用进行检测
 NGX_USER=${NGX_USER:-nobody}
 
 if [ -z "$NGX_GROUP" ]; then
@@ -26,7 +27,7 @@ if [ -z "$NGX_GROUP" ]; then
     fi
 fi
 
-
+# 通过feature脚本对 poll进行检测
 ngx_feature="poll()"
 ngx_feature_name=
 ngx_feature_run=no
